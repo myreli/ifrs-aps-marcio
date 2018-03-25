@@ -81,7 +81,7 @@
           <tr>
             <td>{{c.id}}</td>
             <td><a href="/admin/curso/{{c.id}}">{{c.nome}}</a></td>
-            <td>{{c.area}}</td>
+            <td>{{c.area.nome}}</td>
             <td>{{c.dataInicio}}</td>
             <td>{{c.inscritos}}/{{c.vagas}}</td>
             <td>
