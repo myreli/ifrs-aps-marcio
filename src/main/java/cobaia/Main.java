@@ -33,9 +33,9 @@ import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 
-import cobaia.modelo.Area;
-import cobaia.modelo.Curso;
-import cobaia.modelo.Usuario;
+import cobaia.model.Area;
+import cobaia.model.Curso;
+import cobaia.model.Usuario;
 //import javafx.scene.image.Image;
 import spark.ModelAndView;
 import spark.Request;
@@ -52,25 +52,26 @@ public class Main {
 
 		final String SALT = "cobaiaforever";
 		final DateTimeFormatter DATE_FORMATTER_BR = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		final SimpleDateFormat ISODateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		final SimpleDateFormat ISOTimeFormat = new SimpleDateFormat("hh:mm");
+		final TemplateEngine pebble = new PebbleTemplateEngine();
+		// final TemplateEngine velocity = new VelocityTemplateEngine();
 
+		DebugScreen.enableDebugScreen();
+		Spark.staticFileLocation("/public");
+		
 		try {
 			Class.forName(org.hsqldb.jdbcDriver.class.getName());
 		} catch (ClassNotFoundException e) {
 			throw new ExceptionInInitializerError(e);
 		}
 
-		Spark.staticFileLocation("/public");
-		// final TemplateEngine velocity = new VelocityTemplateEngine();
-		final TemplateEngine pebble = new PebbleTemplateEngine();
-		DebugScreen.enableDebugScreen();
-		final SimpleDateFormat ISODateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		final SimpleDateFormat ISOTimeFormat = new SimpleDateFormat("hh:mm");
-
+		// ROUTES
+		
 		Spark.get("/", new Route() {
 			public Object handle(Request req, Response resp) throws Exception {
 				Map<String, String> map = new HashMap<>();
 
-				/* PASSAR O USUÁRIO SE PRESENTE NA SESSÃO PARA A VIEW */
 				if (req.session().attribute("usuario") != null) {          
 					map.put("usuario", req.session().attribute("usuario").toString());
 					map.put("email", req.session().attribute("email").toString());
@@ -79,9 +80,6 @@ public class Main {
 				return pebble.render(new ModelAndView(map, "templates/index.pebble"));
 			}
 		});
-
-
-
 
 		Spark.get("/login", new Route() {
 			public Object handle(Request req, Response resp) throws Exception {
@@ -475,13 +473,14 @@ public class Main {
 					String sql = "SELECT * FROM cursos LIMIT 10";
 					PreparedStatement stmt = con.prepareStatement(sql);          
 					ResultSet rs = stmt.executeQuery();
-					List<Map<String, Object>> cursos = new ArrayList<>();
+					List<Curso> cursos = new ArrayList<>();
 					map.put("cursos", cursos);
 					while (rs.next()) {
-						Map<String, Object> curso = new HashMap<>();
-						curso.put("nome", rs.getString("nome"));
-						curso.put("id", rs.getInt("id"));
-						curso.put("resumo", rs.getString("resumo"));
+						Curso curso = new Curso();
+						curso.setId(rs.getInt("id"));
+						curso.setNome(rs.getString("nome"));
+						curso.setResumo(rs.getString("resumo"));
+
 						cursos.add(curso);
 					}
 
