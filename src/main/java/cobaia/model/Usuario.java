@@ -1,5 +1,7 @@
 package cobaia.model;
 
+import cobaia.persistence.UsuarioDAO;
+
 /**
  * @author myreli
  *
@@ -17,7 +19,9 @@ public class Usuario extends AbstractModel {
 	private Status 	status;
 	private String 	token;
 	
+	private UsuarioDAO dao = new UsuarioDAO();
 	
+	public Usuario() {}
 	
 	/**
 	 * @param nome
@@ -112,6 +116,28 @@ public class Usuario extends AbstractModel {
         if (senha.length() < 5 || senha.length() > 50)
           addError("erro", "A sua senha deve ter entre 5 e 50 caracteres");*/         
 	}
-	
+
+	@Override
+	public void load(int id) throws ModelNotFoundException {
+		Usuario temp = dao.find(id);
+		if (temp == null) throw new ModelNotFoundException();
+		
+		this.setId(temp.getId());
+		this.setNome(temp.getNome());
+		this.setEmail(temp.email);
+		this.setStatus(temp.status);
+		this.setToken(temp.token);
+	}
+
+	@Override
+	public void delete() {
+		dao.delete(this);
+	}
+
+	@Override
+	protected void doSave() {
+		if (this.isPersistent()) dao.update(this);
+		else dao.create(this);
+	}
 	
 }

@@ -297,6 +297,24 @@ public class Curso extends AbstractModel {
 	public boolean temImagem() {
 		return tipoImagem != null;
 	}
+
+	@Override
+	public void load(int id) throws ModelNotFoundException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void doSave() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	

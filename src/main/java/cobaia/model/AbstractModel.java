@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 
+
 /**
  * @author myreli
  *
@@ -20,10 +21,37 @@ public abstract class AbstractModel {
 	public abstract void validate();
 		
 	/**
+	 * @return the id
+	 */
+	public Integer getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	/**
 	 * @return true if the object is valid due to its validation requirements
 	 */
 	public boolean isValid() {
 		return getErrors().isEmpty();
+	}
+	
+	/**
+	 * @return true if the object is transient
+	 */
+	public boolean isTransient() {
+		return getId() == null;
+	}
+	
+	/**
+	 * @return true if the object is persistent
+	 */
+	public boolean isPersistent() {
+		return getId() != null;
 	}
 
 	/**
@@ -122,16 +150,19 @@ public abstract class AbstractModel {
 		return true;
 	}
 	
-	/**
-	 * @return the id
-	 */
-	public Integer getId() {
-		return id;
+	public abstract void load(int id) throws ModelNotFoundException;	
+	
+	public boolean save() {  // TEMPLATE METHOD
+		validate();
+		if (isValid()) {
+			doSave(); // GANCHO
+			return true;
+		}
+		return false;
 	}
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Integer id) {
-		this.id = id;
-	}
+	
+	public abstract void delete();
+	
+	protected abstract void doSave();
+	
 }
