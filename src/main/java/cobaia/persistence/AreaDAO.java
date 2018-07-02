@@ -10,9 +10,9 @@ import java.util.List;
 
 import cobaia.model.Area;
 
-public class AreaDAO extends AbstractDAO<Area> {
+public class AreaDAO extends GenericDAO {
 
-	@Override
+/*	@Override
 	public void create(Area area) {
 		try (Connection con = super.openConnection()) {
 			String sql = "INSERT INTO areas (nome) VALUES (?)";
@@ -30,8 +30,8 @@ public class AreaDAO extends AbstractDAO<Area> {
 		}
 		
 	}
-
-	@Override
+*/
+/*	@Override
 	public List<Area> read() {
 		List<Area> areas = new ArrayList<>();
 		try (Connection con = super.openConnection()) {
@@ -47,9 +47,9 @@ public class AreaDAO extends AbstractDAO<Area> {
 			throw new PersistenceException(sqle);
 		}
 		return areas;
-	}
+	}*/
 
-	@Override
+/*	@Override
 	public void update(Area area) {
 		if (area.getId() == null) {
 			throw new PersistenceException("O objeto é transiente e não pode ser atualizado");
@@ -64,8 +64,8 @@ public class AreaDAO extends AbstractDAO<Area> {
 			throw new PersistenceException(sqle);
 		}
 	}
-
-	@Override
+*/
+	/*@Override
 	public void delete(Area area) {
 		if (area.getId() == null) {
 			throw new PersistenceException("O objeto é transiente e não pode ser deletado");
@@ -80,7 +80,7 @@ public class AreaDAO extends AbstractDAO<Area> {
 		} catch (SQLException sqle) {
 			throw new PersistenceException(sqle);
 		}
-	}
+	}*/
 
 	@Override
 	public Area find(int id) {

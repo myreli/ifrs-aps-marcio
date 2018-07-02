@@ -1,5 +1,7 @@
 package cobaia.model;
 
+import cobaia.persistence.Column;
+import cobaia.persistence.Table;
 import cobaia.persistence.UsuarioDAO;
 
 /**
@@ -7,16 +9,22 @@ import cobaia.persistence.UsuarioDAO;
  *
  */
 
+@Table(name = "usuarios")
 public class Usuario extends AbstractModel {
 
 	public enum Status {
 		REGISTRADO, ATIVADO;
 	}
 	
+	@Column
 	private String 	nome;
+	@Column
 	private String 	email;
+	@Column
 	private String 	senha;
+	@Column
 	private Status 	status;
+	@Column
 	private String 	token;
 	
 	private UsuarioDAO dao = new UsuarioDAO();

@@ -1,15 +1,18 @@
 package cobaia.model;
 
-import cobaia.modelo.Area;
-import cobaia.modelo.ModelNotFoundException;
 import cobaia.persistence.AreaDAO;
+import cobaia.persistence.Column;
+import cobaia.persistence.Table;
 
 /**
  * @author myreli
  *
  */
+
+@Table(name = "areas")
 public class Area extends AbstractModel {
 
+	@Column
 	private String nome;
 	
 	private AreaDAO dao = new AreaDAO();
