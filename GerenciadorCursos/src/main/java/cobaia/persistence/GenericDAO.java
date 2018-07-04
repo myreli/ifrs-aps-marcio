@@ -11,8 +11,6 @@ import java.util.List;
 
 import com.myreli.AbstractModel;
 
-
-
 public class GenericDAO extends AbstractDAO<AbstractModel> {
 
 	@Override
@@ -113,6 +111,8 @@ public class GenericDAO extends AbstractDAO<AbstractModel> {
 				if (i < fields.size() - 1) sql.append(", ");
 			}
 			
+			sql.append(" WHERE id = ").append(o.getId()).append(" AND last_update = ").append(o.getLast_update());
+			
 			PreparedStatement stmt = con.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
 
 			for (int i = 0; i < fields.size(); i++) {
@@ -126,6 +126,8 @@ public class GenericDAO extends AbstractDAO<AbstractModel> {
 				if (rs.next()) {
 					o.setId(rs.getInt(1));
 				}	
+			} else {
+				throw new PersistenceException("O registrado foi alterado...");
 			}
 		} catch (Exception e) {
 			throw new PersistenceException(e);

@@ -1,7 +1,9 @@
 package com.myreli;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +16,7 @@ import java.util.Map;
 public abstract class AbstractModel {
 
 	protected Integer id;
+	protected Timestamp last_update;
 	protected final SimpleDateFormat ISODateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	protected final SimpleDateFormat ISOTimeFormat = new SimpleDateFormat("hh:mm");
 	private Map<String, String> errors = new HashMap<>();
@@ -31,6 +34,14 @@ public abstract class AbstractModel {
 	 */
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Timestamp getLast_update() {
+		return last_update;
+	}
+
+	public void setLast_update(Timestamp timestamp) {
+		this.last_update = timestamp;
 	}
 
 	/**

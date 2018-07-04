@@ -92,6 +92,7 @@ public class AreaDAO extends GenericDAO {
 			ResultSet rs = stmt.executeQuery();
 			if (rs.next()) {
 				area = new Area(rs.getString("nome"), id);
+				area.setLast_update(rs.getTimestamp("last_updated"));
 			}
 		} catch (SQLException sqle) {
 			throw new PersistenceException(sqle);
