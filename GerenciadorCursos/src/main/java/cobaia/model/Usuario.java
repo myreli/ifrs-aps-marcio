@@ -1,5 +1,11 @@
 package cobaia.model;
 
+import com.myreli.AbstractModel;
+import com.myreli.Email;
+import com.myreli.ModelNotFoundException;
+import com.myreli.Required;
+import com.myreli.StrLength;
+
 import cobaia.persistence.Column;
 import cobaia.persistence.Table;
 import cobaia.persistence.UsuarioDAO;

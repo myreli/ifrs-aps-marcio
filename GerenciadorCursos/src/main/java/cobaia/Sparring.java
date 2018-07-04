@@ -6,9 +6,10 @@ import java.util.UUID;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
+import com.myreli.Validator;
+
 import cobaia.model.Area;
 import cobaia.model.Usuario;
-import cobaia.model.Validator;
 
 public class Sparring {
 

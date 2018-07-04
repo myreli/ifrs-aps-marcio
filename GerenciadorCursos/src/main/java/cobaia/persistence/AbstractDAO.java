@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 
-import cobaia.model.AbstractModel;
+import com.myreli.AbstractModel;
 
 public abstract class AbstractDAO <T extends AbstractModel> {
 

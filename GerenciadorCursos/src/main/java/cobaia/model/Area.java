@@ -1,5 +1,9 @@
 package cobaia.model;
 
+import com.myreli.AbstractModel;
+import com.myreli.ModelNotFoundException;
+import com.myreli.Required;
+
 import cobaia.persistence.AreaDAO;
 import cobaia.persistence.Column;
 import cobaia.persistence.Table;

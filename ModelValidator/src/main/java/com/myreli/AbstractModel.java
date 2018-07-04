@@ -1,4 +1,4 @@
-package cobaia.model;
+package com.myreli;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;

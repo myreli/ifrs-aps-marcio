@@ -1,4 +1,4 @@
-package cobaia.model;
+package com.myreli;
 
 public class ModelNotFoundException extends Exception {
 

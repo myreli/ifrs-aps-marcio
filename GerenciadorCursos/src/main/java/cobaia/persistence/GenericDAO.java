@@ -9,7 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import cobaia.model.AbstractModel;
+import com.myreli.AbstractModel;
+
 
 
 public class GenericDAO extends AbstractDAO<AbstractModel> {
