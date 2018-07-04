@@ -7,6 +7,8 @@ import java.util.UUID;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import cobaia.model.Area;
+import cobaia.model.Usuario;
+import cobaia.model.Validator;
 
 public class Sparring {
 
@@ -36,6 +38,37 @@ public class Sparring {
     
     System.out.println(test.getId() == null);
     
+    System.out.println("validator...");
+    
+    Area area = new Area(null);
+    
+    System.out.println(Validator.validate(area) == false);
+    
+    area.setNome("teste");
+    
+    System.out.println(Validator.validate(area) == true);  
+    
+    Usuario u = new Usuario();
+    
+    u.setNome("My");
+    u.setEmail("myreli.com");
+    u.setSenha("");
+    
+    System.out.println(Validator.validate(u) == false);
+    
+    u.setNome("Myreli");
+    
+    System.out.println(Validator.validate(u) == false);
+    
+    u.setEmail("myreli@mail.com");
+
+    System.out.println(Validator.validate(u) == false);
+    
+    u.setSenha(md5);
+    
+    System.out.println(Validator.validate(u) == true);
+    System.out.println("\n\nGAME OVER");
+
   }
 
 }

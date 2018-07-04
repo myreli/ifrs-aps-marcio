@@ -16,11 +16,11 @@ public class Usuario extends AbstractModel {
 		REGISTRADO, ATIVADO;
 	}
 	
-	@Column
+	@Column @StrLength(min = 3, max = 50)
 	private String 	nome;
-	@Column
+	@Column @Email
 	private String 	email;
-	@Column
+	@Column @Required
 	private String 	senha;
 	@Column
 	private Status 	status;

@@ -12,7 +12,7 @@ import cobaia.persistence.Table;
 @Table(name = "areas")
 public class Area extends AbstractModel {
 
-	@Column
+	@Column @Required
 	private String nome;
 	
 	private AreaDAO dao = new AreaDAO();
