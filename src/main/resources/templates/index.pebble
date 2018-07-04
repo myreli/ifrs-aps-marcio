@@ -49,6 +49,11 @@
       <p class="lead">Este aplicativo cobaia permite cadastra cursos e gerenciar as vagas com um sistema de inscrições. É apenas uma <em>cobaia</em>, <strong>não é sério!</strong></p>
       <a class="btn btn-lg btn-outline-primary" href="/cursos" role="button">Ver cursos abertos &raquo;</a>
     </div>
+    <div class="jumbotron">
+    	{% if 2 is prime and 10 is not prime %}
+			<p>teste da extensão de pebble bem sucedido! :D</p>
+		{% endif %}
+    </div>
   </main>
 
 </body>

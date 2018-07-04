@@ -12,18 +12,13 @@ import java.sql.Types;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.time.format.FormatStyle;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.imageio.ImageReader;
-import javax.imageio.stream.ImageInputStream;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.http.Part;
 
@@ -33,9 +28,12 @@ import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 
+import com.mitchellbosecke.pebble.PebbleEngine;
+
 import cobaia.model.Area;
 import cobaia.model.Curso;
 import cobaia.model.Usuario;
+import cobaia.view.helper.CustomPebbleExtensions;
 //import javafx.scene.image.Image;
 import spark.ModelAndView;
 import spark.Request;
@@ -54,11 +52,14 @@ public class Main {
 		final DateTimeFormatter DATE_FORMATTER_BR = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		final SimpleDateFormat ISODateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		final SimpleDateFormat ISOTimeFormat = new SimpleDateFormat("hh:mm");
-		final TemplateEngine pebble = new PebbleTemplateEngine();
+
+		PebbleEngine engine = new PebbleEngine.Builder().extension(new CustomPebbleExtensions()).build();
+		final TemplateEngine pebble = new PebbleTemplateEngine(engine);
 		// final TemplateEngine velocity = new VelocityTemplateEngine();
 
 		DebugScreen.enableDebugScreen();
 		Spark.staticFileLocation("/public");
+		
 		
 		try {
 			Class.forName(org.hsqldb.jdbcDriver.class.getName());
